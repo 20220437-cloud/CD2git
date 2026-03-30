@@ -7,4 +7,4 @@
 
 ## 📂 Tài liệu
 - docs/functional_spec.md
-- docs/ui_mockup.png
+
