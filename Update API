@@ -1,0 +1,185 @@
+📄 1. API LIST (TỔNG QUAN)
+STT API Method Mô tả
+1 /api/auth/register POST Đăng ký
+2 /api/auth/login POST Đăng nhập
+3 /api/user/profile GET Lấy thông tin user
+4 /api/products GET Lấy danh sách sản phẩm
+5 /api/products/:id GET Chi tiết sản phẩm
+6 /api/cart GET Lấy giỏ hàng
+7 /api/cart/add POST Thêm vào giỏ
+8 /api/cart/remove DELETE Xoá sản phẩm
+9 /api/order POST Tạo đơn hàng
+10 /api/orders GET Lấy danh sách đơn
+📄 2. API DETAIL (CHI TIẾT TỪNG API)
+🔐 1. REGISTER
+URL: /api/auth/register
+Method: POST
+Mô tả: Tạo tài khoản mới
+📥 Input
+{
+  "name": "string",
+  "email": "string",
+  "password": "string"
+}
+📤 Output
+{
+  "status": 201,
+  "message": "Register success",
+  "user": {
+    "id": "1",
+    "name": "Hải",
+    "email": "abc@gmail.com"
+  }
+}
+🔐 2. LOGIN
+URL: /api/auth/login
+Method: POST
+📥 Input
+{
+  "email": "string",
+  "password": "string"
+}
+📤 Output
+{
+  "status": 200,
+  "token": "jwt_token",
+  "user": {
+    "id": "1",
+    "name": "Hải"
+  }
+}
+👤 3. PROFILE
+URL: /api/user/profile
+Method: GET
+Header: Authorization: Bearer token
+📤 Output
+{
+  "id": "1",
+  "name": "Hải",
+  "email": "abc@gmail.com"
+}
+🛍️ 4. GET PRODUCTS
+URL: /api/products
+Method: GET
+📤 Output
+[
+  {
+    "id": "p1",
+    "name": "Áo thun",
+    "price": 200000,
+    "image": "url"
+  }
+]
+🔍 5. PRODUCT DETAIL
+URL: /api/products/:id
+Method: GET
+📤 Output
+{
+  "id": "p1",
+  "name": "Áo thun",
+  "price": 200000,
+  "description": "Đẹp",
+  "image": "url"
+}
+🛒 6. GET CART
+URL: /api/cart
+Method: GET
+📤 Output
+{
+  "userId": "1",
+  "items": [
+    {
+      "productId": "p1",
+      "quantity": 2
+    }
+  ]
+}
+➕ 7. ADD TO CART
+URL: /api/cart/add
+Method: POST
+📥 Input
+{
+  "productId": "p1",
+  "quantity": 1
+}
+📤 Output
+{
+  "message": "Added to cart"
+}
+❌ 8. REMOVE CART
+URL: /api/cart/remove
+Method: DELETE
+📥 Input
+{
+  "productId": "p1"
+}
+💳 9. CREATE ORDER
+URL: /api/order
+Method: POST
+📥 Input
+{
+  "items": [
+    {
+      "productId": "p1",
+      "quantity": 2
+    }
+  ],
+  "totalPrice": 400000
+}
+📤 Output
+{
+  "message": "Order created",
+  "orderId": "o1"
+}
+📦 10. GET ORDERS
+URL: /api/orders
+Method: GET
+📤 Output
+[
+  {
+    "id": "o1",
+    "totalPrice": 400000,
+    "status": "pending"
+  }
+]
+🗄️ 3. DATABASE DESIGN
+👤 Users
+{
+  "_id": "ObjectId",
+  "name": "string",
+  "email": "string",
+  "password": "string"
+}
+🛍️ Products
+{
+  "_id": "ObjectId",
+  "name": "string",
+  "price": "number",
+  "description": "string",
+  "image": "string"
+}
+🛒 Cart
+{
+  "userId": "ObjectId",
+  "items": [
+    {
+      "productId": "ObjectId",
+      "quantity": 1
+    }
+  ]
+}
+📦 Orders
+{
+  "userId": "ObjectId",
+  "items": [],
+  "totalPrice": "number",
+  "status": "pending",
+  "createdAt": "date"
+}
+🔗 4. MAPPING VỚI FLUTTER
+API Màn hình
+/login LoginScreen
+/products HomeScreen
+/products/:id DetailScreen
+/cart CartScreen
+/order CheckoutScreen
