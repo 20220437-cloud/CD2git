@@ -1,5 +1,5 @@
 // may ao http://10.0.2.2:3000
-// may that lay dia chi ip mang VD: 192.168.24.101
+
 const MAIN_URL = 'http://10.0.2.2:3000';
 
 const FAVORITE_PRODUCT_BOX = 'FAVORITE_PRODUCT_BOX';
